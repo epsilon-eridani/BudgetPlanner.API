@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetPlanner.Data\BudgetPlanner.Data.csproj" />
+    <ProjectReference Include="..\BudgetPlanner.Domain\BudgetPlanner.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
