@@ -4,14 +4,16 @@ using BudgetPlanner.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BudgetPlanner.Data.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    partial class ItemContextModelSnapshot : ModelSnapshot
+    [Migration("20180620180458_changemodel6")]
+    partial class changemodel6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace BudgetPlanner.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name");
 
@@ -47,7 +47,7 @@ namespace BudgetPlanner.Data.Migrations
 
                     b.Property<double>("Amount");
 
-                    b.Property<int?>("CustomCategoryID");
+                    b.Property<int?>("CustomCategoryId");
 
                     b.Property<DateTime>("Date");
 
@@ -55,15 +55,13 @@ namespace BudgetPlanner.Data.Migrations
 
                     b.Property<bool>("IsExpense");
 
-                    b.Property<DateTime>("LastModified");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("ParentCategoryId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomCategoryID");
+                    b.HasIndex("CustomCategoryId");
 
                     b.HasIndex("ParentCategoryId");
 
@@ -77,8 +75,6 @@ namespace BudgetPlanner.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name");
 
@@ -97,9 +93,10 @@ namespace BudgetPlanner.Data.Migrations
 
             modelBuilder.Entity("BudgetPlanner.Domain.Item", b =>
                 {
-                    b.HasOne("BudgetPlanner.Domain.CustomCategory")
+                    b.HasOne("BudgetPlanner.Domain.CustomCategory", "CustomCategory")
                         .WithMany("Items")
-                        .HasForeignKey("CustomCategoryID");
+                        .HasForeignKey("CustomCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BudgetPlanner.Domain.ParentCategory", "ParentCategory")
                         .WithMany("Items")

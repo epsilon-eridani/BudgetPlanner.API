@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BudgetPlanner.Domain
 {
-    public class Item
+    public class Item : ClientChangeTracker
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
+
+        public string Name { get; set; }
 
         public double Amount { get; set; }
 
         public bool IsExpense { get; set; }
 
         public DateTime Date { get; set; }
-
-        public CustomCategory CustomCategory { get; set; }
-
-        public int CustomCategoryId { get; set; }
 
         public ParentCategory ParentCategory { get; set; }
 

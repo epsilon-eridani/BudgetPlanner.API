@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BudgetPlanner.Data
@@ -11,15 +12,10 @@ namespace BudgetPlanner.Data
         public DbSet<Item> Items { get; set; }
         public DbSet<ParentCategory> ParentCategories { get; set; }
         public DbSet<CustomCategory> CustomCategories { get; set; }
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Item>()
-                .HasOne(i => i.CustomCategory)
-                .WithMany(c => c.Items)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Item>()
                 .HasOne(i => i.ParentCategory)
                 .WithMany(c => c.Items)
@@ -30,6 +26,13 @@ namespace BudgetPlanner.Data
                 .WithMany(c => c.CustomCategories)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
+                modelBuilder.Entity(entityType.Name).Ignore("IsDirty");
+            }
+
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -37,6 +40,15 @@ namespace BudgetPlanner.Data
         {
             optionsBuilder.UseSqlServer(
                 "Data Source=DESKTOP-I558N3K;Initial Catalog=BudgetPlanner;Integrated Security=True");
+        }
+
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
+            {
+                entry.Property("LastModified").CurrentValue = DateTime.Now;
+            }
+            return base.SaveChanges();
         }
     }
 }

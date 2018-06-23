@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BudgetPlanner.Domain
 {
-    public class CustomCategory
+    public class CustomCategory : ClientChangeTracker
     {
         public int ID { get; set; }
 
@@ -17,7 +17,7 @@ namespace BudgetPlanner.Domain
 
         public int ParentCategoryId { get; set; }
 
-        public ICollection<Item> Items { get; set; }
+        public List<Item> Items { get; set; }
 
     }
 }

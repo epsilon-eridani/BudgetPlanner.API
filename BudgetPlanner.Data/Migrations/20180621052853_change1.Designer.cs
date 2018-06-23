@@ -4,14 +4,16 @@ using BudgetPlanner.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BudgetPlanner.Data.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    partial class ItemContextModelSnapshot : ModelSnapshot
+    [Migration("20180621052853_change1")]
+    partial class change1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace BudgetPlanner.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name");
 
@@ -55,8 +55,6 @@ namespace BudgetPlanner.Data.Migrations
 
                     b.Property<bool>("IsExpense");
 
-                    b.Property<DateTime>("LastModified");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("ParentCategoryId");
@@ -77,8 +75,6 @@ namespace BudgetPlanner.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name");
 
