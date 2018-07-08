@@ -1,5 +1,7 @@
 ﻿using BudgetPlanner.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +9,16 @@ using System.Text;
 
 namespace BudgetPlanner.Data
 {
-    public class ItemContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Item> Items { get; set; }
         public DbSet<ParentCategory> ParentCategories { get; set; }
         public DbSet<CustomCategory> CustomCategories { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,7 +37,6 @@ namespace BudgetPlanner.Data
                 modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
                 modelBuilder.Entity(entityType.Name).Ignore("IsDirty");
             }
-
 
             base.OnModelCreating(modelBuilder);
         }

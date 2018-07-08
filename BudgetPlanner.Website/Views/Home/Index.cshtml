@@ -1,0 +1,43 @@
+﻿@model BudgetPlanner.Data.ItemRepository
+
+
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                        <tr class="table100-head">
+                            <th class="column1">ID</th>
+                            <th class="column2">Name</th>
+                            <th class="column3">Amount</th>
+                            <th class="column4">IsExpense</th>
+                            <th class="column5">Date</th>
+                            <th class="column6">Parent Category</th>
+                            <th class="column7">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model._itemContext.Items)
+                        {
+
+                        <tr>
+                            <td class="column1">@item.ID</td>
+                            <td class="column2">@item.Name</td>
+                            <td class="column3">@item.Amount</td>
+                            <td class="column4">@item.IsExpense</td>
+                            <td class="column5">@item.Date</td>
+                            <td class="column6">@item.ParentCategoryId</td>
+                            <td class="column6">@item.Description</td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

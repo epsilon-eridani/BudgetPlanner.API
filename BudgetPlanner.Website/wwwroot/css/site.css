@@ -1,0 +1,48 @@
+﻿.w3-top, .w3-bottom {
+    position: fixed;
+    width: 100%;
+    z-index: 1
+}
+
+.w3-top {
+    top: 0
+}
+
+.w3-bottom {
+    bottom: 0
+}
+
+.w3-bar .w3-bar-item {
+    padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0
+}
+
+.w3-btn, .w3-button {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.w3-padding-small {
+    padding: 4px 8px 
+}
+
+.w3-padding {
+    padding: 8px 16px 
+}
+
+.w3-padding-large {
+    padding: 12px 24px 
+}
