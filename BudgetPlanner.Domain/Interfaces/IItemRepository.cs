@@ -8,7 +8,7 @@ namespace BudgetPlanner.Domain
     {
         IEnumerable<Item> GetGreatestExpense(int count);
         IEnumerable<Item> GetExpenses(int pageIndex, int pageSize);
-        string GetChartJson();
+        IEnumerable<ChartData> GetPieChartData(int[] categories);
         double CountExpenses();
     }
 }

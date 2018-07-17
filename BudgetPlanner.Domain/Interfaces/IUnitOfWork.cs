@@ -10,6 +10,8 @@ namespace BudgetPlanner.Domain
 
         IRepository<ParentCategory> CategoryRepository { get; }
 
+        IRepository<ApplicationUser> UserRepository { get; }
+
         int Complete();
     }
 }

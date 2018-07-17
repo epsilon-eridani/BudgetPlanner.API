@@ -17,6 +17,7 @@ namespace BudgetPlanner.Data
         }
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<ChartData> ChartData { get; set; }
         public DbSet<ParentCategory> ParentCategories { get; set; }
         public DbSet<CustomCategory> CustomCategories { get; set; }
 
@@ -34,9 +35,13 @@ namespace BudgetPlanner.Data
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
+                
                 modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
+                
                 modelBuilder.Entity(entityType.Name).Ignore("IsDirty");
             }
+
+            modelBuilder.Entity<ChartData>().Ignore("LastModified");
 
             base.OnModelCreating(modelBuilder);
         }

@@ -24,7 +24,6 @@ namespace BudgetPlanner.Domain
 
         public string Description { get; set; }
 
-        public ApplicationUser User { get; set; }
-
+        public Guid UserId { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace BudgetPlanner.Data
     {
         private readonly ApplicationDbContext _context;
         private Repository<ParentCategory> categoryRepository;
+        private Repository<ApplicationUser> userRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -21,6 +22,14 @@ namespace BudgetPlanner.Data
             get
             {
                 return categoryRepository = categoryRepository ?? new Repository<ParentCategory>(_context);
+            }
+        }
+
+        public IRepository<ApplicationUser> UserRepository
+        {
+            get
+            {
+                return userRepository = userRepository ?? new Repository<ApplicationUser>(_context);
             }
         }
 

@@ -8,7 +8,5 @@ namespace BudgetPlanner.Domain
     public class ApplicationUser : IdentityUser
     {
         public override string UserName { get; set; }
-
-        public List<Item> Items { get; set; }
     }
 }

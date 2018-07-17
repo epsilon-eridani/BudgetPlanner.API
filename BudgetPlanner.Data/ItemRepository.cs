@@ -1,7 +1,11 @@
 ﻿using BudgetPlanner.Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -30,21 +34,19 @@ namespace BudgetPlanner.Data
                 .ToList();
         }
 
-        public string GetChartJson()
-        {
-            var labels = _ApplicationDbContext.Items
-                .OrderBy(d => d.Date)
-                .Select(x => new {x.Date, x.Amount})
-                .ToList();
-
-            var result = JsonConvert.SerializeObject(labels);
-
-            return result;
-        }
-
         public double CountExpenses()
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<ChartData> GetPieChartData(int[] categories)
+        {
+            var tvp = new TableValuedParameterBuilder("dbo.ArrayInt", new SqlMetaData("CategoryId", SqlDbType.Int))
+            .AddRow(categories)
+            .CreateParameter("p0");
+
+            var pieChartData = _ApplicationDbContext.ChartData.FromSql($"EXEC GetTotalPerCategories @p0", tvp).ToList();
+            return pieChartData;
         }
 
         public ApplicationDbContext _ApplicationDbContext;
