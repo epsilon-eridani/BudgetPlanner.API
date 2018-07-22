@@ -49,6 +49,13 @@ namespace BudgetPlanner.Data
             return pieChartData;
         }
 
+        public IEnumerable<Item> GetAllWithCategories()
+        {
+            return _ApplicationDbContext.Items
+                .Include(item => item.ParentCategory)
+                .ToList();
+        }
+
         public ApplicationDbContext _ApplicationDbContext;
     }
 }
