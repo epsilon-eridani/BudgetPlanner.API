@@ -34,6 +34,7 @@ namespace SomeUI
 
                 var es = context.ChangeTracker.Entries().ToList();
                 DisplayState(es, "AddGraphAllNew");
+                
             }
 
         }
